@@ -122,4 +122,12 @@ public class LightsOut {
         System.out.println("In a board of "+ width + "x" + height +": " + results.size() + " solution" + (results.size() > 1 ? "s." : "."));
 
     }
+
+    ArrayList<Solution> solve(GameModel model){
+
+    }
+
+    Solution solveShortest(GameModel model){
+        
+    }
 }

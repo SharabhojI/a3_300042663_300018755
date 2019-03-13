@@ -186,7 +186,7 @@ public class Solution {
 
     /**
      * checks if board[i][j] and its neighborhood
-     * have an odd number of values ``true''
+     * have an odd number of values ''true''
      */
 
     private boolean oddNeighborhood(int i, int j) {
@@ -231,6 +231,26 @@ public class Solution {
         }
         out.append("]");
         return out.toString();
+    }
+
+    public boolean stillPossible(boolean nextValue, GameModel model){
+    	//todo
+    }
+
+    public boolean finish(GameModel model){
+    	//todo
+    }
+
+    public boolean isSuccesful(GameModel model){
+    	//todo
+    }
+
+    public int getSize(){
+    	//todo
+    }
+
+    public boolean get(int i, int j){
+    	//todo
     }
 
 }
