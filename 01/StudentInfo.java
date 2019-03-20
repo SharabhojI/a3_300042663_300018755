@@ -17,12 +17,12 @@ public class StudentInfo {
 
         System.out.println("************************************************************");
         System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
-        System.out.println("*                                                          *");
+        System.out.println("*            Mohit Kapur #300018755 Section B              *");
+        System.out.println("*         Sharabhoj Iyengar #300042663 Section B           *");
+        System.out.println("*                      Assignment 3                        *");
         System.out.println("*                                                          *");
         System.out.println("************************************************************");
         System.out.println();
 
     }
-
 }

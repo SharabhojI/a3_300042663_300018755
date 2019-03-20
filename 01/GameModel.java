@@ -1,6 +1,5 @@
 public class GameModel {
 
- // Your code here
 	private int width, height, steps;
 	private Solution board;
 
