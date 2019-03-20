@@ -184,50 +184,9 @@ public class Solution {
     }
 
 
-   /**
-    * this method ensure that add <b>nextValue</b> at the
-    * currentIndex does not make the current solution
-    * impossible. It assumes that the Solution was
-    * built with a series of setNext on which 
-    * stillPossible was always true.
-    * @param nextValue
-    *         The boolean value to add at currentIndex
-    * @return true if the board is not known to be
-    * impossible (which does not mean that the board
-    * is possible!)
-    */
-    public boolean stillPossible(boolean nextValue) {
-
-        if(currentIndex >= width*height) {
-            System.out.println("Board already full");
-            return false;
-        }
-
-        int i = currentIndex/width;
-        int j = currentIndex%width;
-        boolean before = board[i][j];
-        boolean possible = true;
-
-        board[i][j] = nextValue;
-        
-        if((i > 0) && (!oddNeighborhood(i-1,j))){
-            possible = false;
-        }
-        if(possible && (i == (height-1))) {
-            if((j > 0) && (!oddNeighborhood(i,j-1))){
-                possible = false;
-            }
-            if(possible && (j == (width-1))&& (!oddNeighborhood(i,j))){
-                possible = false;            
-            }
-        }
-        board[i][j] = before;
-        return possible;
-    }
-
     /**
      * checks if board[i][j] and its neighborhood
-     * have an odd number of values ``true''
+     * have an odd number of values ''true''
      */
 
     private boolean oddNeighborhood(int i, int j) {
@@ -274,5 +233,24 @@ public class Solution {
         return out.toString();
     }
 
-}
+    public boolean stillPossible(boolean nextValue, GameModel model){
+    	//todo
+    }
 
+    public boolean finish(GameModel model){
+    	//todo
+    }
+
+    public boolean isSuccesful(GameModel model){
+    	//todo
+    }
+
+    public int getSize(){
+    	//todo
+    }
+
+    public boolean get(int i, int j){
+    	//todo
+    }
+
+}

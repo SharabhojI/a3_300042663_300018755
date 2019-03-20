@@ -249,8 +249,4 @@ public class Solution {
     	//todo
     }
 
-    public boolean get(int i, int j){
-    	//todo
-    }
-
 }

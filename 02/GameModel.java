@@ -40,4 +40,26 @@ public class GameModel {
 	public String toString(){
 		return(board.toString());
 	}
+
+	public void click(int i, int j){
+		this.steps += 1;
+		//todo
+
+	}
+
+	public int getNumberOfSteps(){
+		return steps;
+	}
+
+	public boolean isFinished(){
+		//todo
+	}
+
+	public void setSolution(){
+		//todo
+	}
+
+	public boolean solutionSelects(int i, int j){
+		//todo
+	}
 }
