@@ -169,11 +169,11 @@ public class Solution {
     public boolean isSuccessful(){
 
         if(currentIndex < width*height) {
-            System.out.println("Board not finished");
+            System.out.println("Board incomplete");
             return false;
         }
 
-        for(int i = 0; i < height ; i++){
+        for(int i=0; i<height; i++){
             for(int j = 0; j < width; j++) {
                 if(!oddNeighborhood(i,j)){
                     return false;
@@ -242,7 +242,19 @@ public class Solution {
     }
 
     public boolean isSuccesful(GameModel model){
-    	//todo
+    	if(currentIndex < model.getWidth()*model.getHeight()){
+            System.out.println("Board incomplete");
+            return false;
+        }
+
+        for(int i=0; i<model.getHeight(); i++){
+            for(int j = 0; j < model.getWidth(); j++) {
+                if(!oddNeighborhood(i,j)){
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 
     public int getSize(){
