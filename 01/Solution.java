@@ -31,11 +31,7 @@ public class Solution {
     private int currentIndex;
 
     private int row; 
-    private int column;
-
-    private boolean succBoard[][];
-
-
+    private int col;
 
     /**
      * Constructor. Creates an instance of Solution 
@@ -53,10 +49,9 @@ public class Solution {
         this.width = width;
         this.height = height;
         this.row = 0;
-        this.column = 0;
+        this.col = 0;
 
         board = new boolean[height][width];
-        successfulBoard = new boolean[height][width];
         currentIndex = 0;
 
     }
@@ -78,7 +73,6 @@ public class Solution {
         this.row = other.row;
 
         board = new boolean[height][width];
-        this.succBoard = new boolean[height][width];
 
         for(int i = 0; i < currentIndex; i++){
             board[i/width][i%width] = other.board[i/width][i%width];
@@ -194,6 +188,109 @@ public class Solution {
         return true;
     }
 
+    /**
+    * this method ensure that add <b>nextValue</b> at the
+    * currentIndex does not make the current solution
+    * impossible. It assumes that the Solution was
+    * built with a series of setNext on which 
+    * stillPossible was always true.
+    * @param nextValue
+    *         The boolean value to add at currentIndex
+    * @return true if the board is not known to be
+    * impossible (which does not mean that the board
+    * is possible!)
+    */
+    public boolean stillPossible(boolean nextValue) {
+
+        if(currentIndex >= width*height) {
+            System.out.println("Board already full");
+            return false;
+        }
+
+        int i = currentIndex/width;
+        int j = currentIndex%width;
+        boolean before = board[i][j];
+        boolean possible = true;
+
+        board[i][j] = nextValue;
+        
+        if((i > 0) && (!oddNeighborhood(i-1,j))){
+            possible = false;
+        }
+        if(possible && (i == (height-1))) {
+            if((j > 0) && (!oddNeighborhood(i,j-1))){
+                possible = false;
+            }
+            if(possible && (j == (width-1))&& (!oddNeighborhood(i,j))){
+                possible = false;            
+            }
+        }
+        board[i][j] = before;
+        return possible;
+    }
+
+
+    /**
+    * this method attempts to finish the board. 
+    * It assumes that the Solution was
+    * built with a series of setNext on which 
+    * stillPossible was always true. It cannot
+    * be called if the board can be extended 
+    * with both true and false and still be 
+    * possible.
+    *
+    * @return true if the board can be finished.
+    * the board is also completed
+    */
+    public boolean finish(){
+
+
+        int i = currentIndex/width;
+        int j = currentIndex%width;
+        
+/*
+        if(i == 0 && height > 1) {
+            System.out.println("First line incomplete, can't proceed");
+            return false;
+        }
+*/
+
+        while(currentIndex < height*width) {
+            if(i < height - 1 ) {
+                setNext(!oddNeighborhood(i-1,j));
+                i = currentIndex/width;
+                j = currentIndex%width;
+            } else { //last raw
+                if(j == 0){
+                    setNext(!oddNeighborhood(i-1,j));
+                } else {
+                   if((height > 1) && oddNeighborhood(i-1,j) != oddNeighborhood(i,j-1)){
+                     return false;
+                   }
+                   setNext(!oddNeighborhood(i,j-1));
+                } 
+                i = currentIndex/width;
+                j = currentIndex%width;
+            }
+        }
+        if(!oddNeighborhood(height-1,width-1)){
+            return false;
+        }
+        // here we should return true because we could
+        // successfully finish the board. However, as a
+        // precaution, if someone called the method on
+        // a board that was unfinishable before calling
+        // the method, we do a complete check
+        
+        if(!isSuccessful()) {
+            System.out.println("Warning, method called incorrectly");
+            return false;
+        }
+       
+        return true;
+
+    }
+
 
     /**
      * checks if board[i][j] and its neighborhood
@@ -245,27 +342,35 @@ public class Solution {
     }
 
     public boolean stillPossible(boolean nextValue, GameModel model){
-    	if (row >= model.getHeight() || col >= model.getWidth()){
-            return false;
-        }
-        if (row == 0 || row-1 == 0){
-            return true;
-        }
 
-        isSuccesful(model);
+        board = new boolean[model.getHeight()][model.getWidth()];
 
-        for (int i = 0; i<model.getWidth(); i++){
-            if (this.succBoard[row-2][i] == false){
-                return false;
+        for (int i = 0; i<height; i++){
+            for (int j = 0; j<width; j++){
+
+                if (model.isON(i,j) == true){
+                    board[i][j] = true;
+                }
             }
         }
 
-        succBoard = new boolean[model.getHeight()][model.getWidth()];
-        return true;
+        return stillPossible(nextValue);
     }
 
     public boolean finish(GameModel model){
-       // 
+
+        board = new boolean[model.getHeight()][model.getWidth()];
+
+        for (int i = 0; i<height; i++){
+            for (int j = 0; j<width; j++){
+
+                if (model.isON(i,j) == true){
+                    board[i][j] = true;
+                }
+            }
+        }
+       
+       return finish();
     }
 
     public boolean isSuccesful(GameModel model){
@@ -288,22 +393,13 @@ public class Solution {
 
         int truCtr = 0;
 
-        while(true){
-            if (currentIndex >= width*height){
-                break;
-            }
-
-            else{
-                if (board[currentIndex/width][currentIndex%width] == true){
+        for (int i = 0; i<height; i++){
+            for (int j  = 0; j<width; j++){
+                if (board[i][j] == true){
                     truCtr++;
-                    currentIndex++;
                 }
             }
-
         }
-
-        return truCtr;
-    	
+    return truCtr;
     }
-
 }

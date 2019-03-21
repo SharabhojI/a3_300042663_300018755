@@ -4,6 +4,7 @@ public class QueueImplementation<E> implements Queue<E> {
 	private E[] q;
 	private int front, rear, count;
 
+	@SuppressWarnings("unchecked")
 	public QueueImplementation(){
 		q = (E[]) new Object[MAX_QUEUE_SIZE];
 		front = 0;
@@ -12,11 +13,11 @@ public class QueueImplementation<E> implements Queue<E> {
 	}
 
 	public E dequeue(){
-		int f = front;
-		front = null;
+		E item = q[front];
+		q[front] = null;
 		front = (front+1) % MAX_QUEUE_SIZE;
 		count -= 1;
-		return(f);
+		return(item);
 	}
 
 	public void enqueue(E o){
@@ -26,7 +27,7 @@ public class QueueImplementation<E> implements Queue<E> {
 	}
 
 	public boolean isEmpty(){
-		return(queue.size() == 0);
+		return(q.length == 0);
 	}
 
 	public E peek(){
