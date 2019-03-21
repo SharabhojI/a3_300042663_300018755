@@ -30,6 +30,11 @@ public class Solution {
      */
     private int currentIndex;
 
+    private int row; 
+    private int column;
+
+    private boolean succBoard[][];
+
 
 
     /**
@@ -47,8 +52,11 @@ public class Solution {
 
         this.width = width;
         this.height = height;
+        this.row = 0;
+        this.column = 0;
 
         board = new boolean[height][width];
+        successfulBoard = new boolean[height][width];
         currentIndex = 0;
 
     }
@@ -66,8 +74,11 @@ public class Solution {
         this.width = other.width;
         this.height = other.height;
         this.currentIndex = other.currentIndex;
+        this.col = other.col;
+        this.row = other.row;
 
         board = new boolean[height][width];
+        this.succBoard = new boolean[height][width];
 
         for(int i = 0; i < currentIndex; i++){
             board[i/width][i%width] = other.board[i/width][i%width];
@@ -234,11 +245,27 @@ public class Solution {
     }
 
     public boolean stillPossible(boolean nextValue, GameModel model){
-    	//todo
+    	if (row >= model.getHeight() || col >= model.getWidth()){
+            return false;
+        }
+        if (row == 0 || row-1 == 0){
+            return true;
+        }
+
+        isSuccesful(model);
+
+        for (int i = 0; i<model.getWidth(); i++){
+            if (this.succBoard[row-2][i] == false){
+                return false;
+            }
+        }
+
+        succBoard = new boolean[model.getHeight()][model.getWidth()];
+        return true;
     }
 
     public boolean finish(GameModel model){
-    	//todo
+       // 
     }
 
     public boolean isSuccesful(GameModel model){
@@ -258,7 +285,25 @@ public class Solution {
     }
 
     public int getSize(){
-    	//todo
+
+        int truCtr = 0;
+
+        while(true){
+            if (currentIndex >= width*height){
+                break;
+            }
+
+            else{
+                if (board[currentIndex/width][currentIndex%width] == true){
+                    truCtr++;
+                    currentIndex++;
+                }
+            }
+
+        }
+
+        return truCtr;
+    	
     }
 
 }

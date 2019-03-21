@@ -14,7 +14,7 @@ public class QueueImplementation<E> implements Queue<E> {
 	public E dequeue(){
 		int f = front;
 		front = null;
-		front = (front+1) % MAX QUEUE SIZE;
+		front = (front+1) % MAX_QUEUE_SIZE;
 		count -= 1;
 		return(f);
 	}
