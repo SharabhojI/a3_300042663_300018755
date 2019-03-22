@@ -47,7 +47,7 @@ public class LightsOut {
      */
     public static ArrayList<Solution> solve(int width, int height){
 
-        SolutionQueue q  = new ArrayListSolutionQueue();
+        Queue<Solution> q  = new QueueImplementation<Solution>();
         ArrayList<Solution> solutions  = new ArrayList<Solution>();
 
         q.enqueue(new Solution(width,height));
@@ -123,7 +123,7 @@ public class LightsOut {
 
     }
 
-    public ArrayList<Solution> solve(GameModel model){
+    public static ArrayList<Solution> solve(GameModel model){
 
         // QueueImplementation q  = new Queue();
         // ArrayList<Solution> solutions  = new ArrayList<Solution>();
@@ -146,9 +146,31 @@ public class LightsOut {
         //     }
         // }
         // return solutions;
+
+        int height = model.getHeight();
+        int width = model.getWidth();
+
+        return solve(height,width);
     }
 
-    Solution solveShortest(GameModel model){
+    static Solution solveShortest(GameModel model){
+
+        int height = model.getHeight();
+        int width = model.getWidth();
+
+        ArrayList<Solution> solutions = solve(height,width);
+
+        Solution minimum = solutions.get(0);
+
+        for (int i = 1; i<solutions.size(); i++){
+
+            if (solutions.get(i).getSize()<minimum.getSize()){
+                minimum = solutions.get(i);
+            }
+
+        }
+
+        return minimum;
         
     }
 }

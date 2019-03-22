@@ -1,14 +1,12 @@
 public class GameModel {
 
 	private int width, height, steps;
-	private Solution board;
+	private boolean[][] board;
 
 	public GameModel(int width, int height){
 		this.height = height;
 		this.width = width;
-
-		board = new Solution(width, height);
-		reset();
+		board = new boolean[height][width]; 
 	}
 
 	public int getHeight(){
@@ -20,12 +18,18 @@ public class GameModel {
 	}
 
 	public boolean isON(int i, int j){
-		return(board.oddNeighborhood(i, j));
+		boolean result = false;
+
+		if (board[i][j] == true){
+			result = true;
+		}
+
+		return result;
 	}
 
 	public void reset(){
 		for(int i = 0; i < getHeight(); i++){
-			for(int j = 0; j < getWidht(); j++){
+			for(int j = 0; j < getWidth(); j++){
 				board[i][j] = false;
 			} 
 		}
@@ -37,6 +41,21 @@ public class GameModel {
 	}
 
 	public String toString(){
-		return(board.toString());
-	}
+
+        String boardStr = "";
+        for (int i = 0; i<this.height; i++){
+            boardStr = boardStr + "[";
+            for (int j = 0; j<this.width; j++){
+                boardStr = boardStr + this.board[i][j];
+
+                if (j != (this.width - 1)){
+                    boardStr = boardStr + ",";
+                }
+            }
+
+            boardStr = boardStr + "]\n";
+        }
+
+        return boardStr;
+    }
 }
