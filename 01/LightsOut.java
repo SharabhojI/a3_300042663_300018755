@@ -57,6 +57,7 @@ public class LightsOut {
             Solution s  = q.dequeue();
             if(s.isReady()) {
                 if(s.isSuccessful()) {
+                    System.out.println("Arraylist not full");
                     System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
                     solutions.add(s);
                 }
@@ -161,17 +162,25 @@ public class LightsOut {
 
         ArrayList<Solution> solutions = solve(width,height);
 
-        Solution minimum = solutions.get(0);
-
-        for (int i = 1; i<solutions.size(); i++){
-
-            if (solutions.get(i).getSize()<minimum.getSize()){
-                minimum = solutions.get(i);
-            }
-
+        if (solutions.size() == 0){
+            throw new IndexOutOfBoundsException("No solutions");
         }
 
-        return minimum;
+        else{
+
+            Solution minimum = solutions.get(0);
+
+            for (int i = 1; i<solutions.size(); i++){
+
+                if (solutions.get(i).getSize()<minimum.getSize()){
+                    minimum = solutions.get(i);
+                }
+
+            }
+
+            return minimum;
+
+        }
         
     }
 }
