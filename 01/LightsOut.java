@@ -122,32 +122,9 @@ public class LightsOut {
 
         }
         System.out.println("In a board of "+ width + "x" + height +": " + results.size() + " solution" + (results.size() > 1 ? "s." : "."));
-
     }
 
     public static ArrayList<Solution> solve(GameModel model){
-
-        // QueueImplementation q  = new Queue();
-        // ArrayList<Solution> solutions  = new ArrayList<Solution>();
-
-        // q.enqueue(new Solution(width,height));
-        // long start = System.currentTimeMillis();
-        // while(!q.isEmpty()){
-        //     Solution s  = q.dequeue();
-        //     if(s.isReady()) {
-        //         if(s.isSuccessful()) {
-        //             System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
-        //             solutions.add(s);
-        //         }
-        //     } else {
-        //         Solution s2 = new Solution(s);
-        //         s.setNext(true);
-        //         q.enqueue(s);
-        //         s2.setNext(false);
-        //         q.enqueue(s2);
-        //     }
-        // }
-        // return solutions;
 
         int height = model.getHeight();
         int width = model.getWidth();
@@ -181,6 +158,5 @@ public class LightsOut {
             return minimum;
 
         }
-        
     }
 }
