@@ -365,7 +365,7 @@ public class Solution {
             for (int j = 0; j<width; j++){
 
                 if (model.isON(i,j) == true){
-                    board[i][j] = true;
+                    board[j][i] = true;
                 }
             }
         }

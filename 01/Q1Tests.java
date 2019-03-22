@@ -53,7 +53,7 @@ public class Q1Tests {
 
     public static void runShortestSolverTest(GameModel model, int size){
 
-        System.out.println("For model :");
+        System.out.println("\nFor model :");
         System.out.println(model);
         Solution s = LightsOut.solveShortest(model);
         if(s == null) {
@@ -80,15 +80,21 @@ public class Q1Tests {
     private static void testShortest(){
         System.out.println("\ntestShortest");
         GameModel model = new GameModel(2,2);
+        System.out.println("Starting test 1");
         runShortestSolverTest(model,4);
+        System.out.println("done testshortest1");
         
         model = new GameModel(3,2);
+        System.out.println("Starting test 2");
         runShortestSolverTest(model,2);
+        System.out.println("done testshortest2");
 
         model.set(2,0,true);
         model.set(0,1,true);
         model.set(1,1,true);
+        System.out.println("Starting test 3");
         runShortestSolverTest(model,2);
+        System.out.println("done test 3");
 
         model.reset();
         model.set(0,0,true);

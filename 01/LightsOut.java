@@ -151,7 +151,7 @@ public class LightsOut {
         int height = model.getHeight();
         int width = model.getWidth();
 
-        return solve(height,width);
+        return solve(width,height);
     }
 
     static Solution solveShortest(GameModel model){
@@ -159,7 +159,7 @@ public class LightsOut {
         int height = model.getHeight();
         int width = model.getWidth();
 
-        ArrayList<Solution> solutions = solve(height,width);
+        ArrayList<Solution> solutions = solve(width,height);
 
         Solution minimum = solutions.get(0);
 

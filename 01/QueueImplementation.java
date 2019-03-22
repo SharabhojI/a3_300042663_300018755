@@ -12,6 +12,7 @@ public class QueueImplementation<T> implements Queue<T> {
 		count = 0;
 	}
 
+	@SuppressWarnings("unchecked")
 	public QueueImplementation(int size){
 		q = (T[]) new Object[size];
 		front = 0;
@@ -27,6 +28,7 @@ public class QueueImplementation<T> implements Queue<T> {
 		return(item);
 	}
 
+	@SuppressWarnings("unchecked")
 	public void enqueue(T element){
 		if(size()<q.length){
 			q[rear] = element;
@@ -40,6 +42,7 @@ public class QueueImplementation<T> implements Queue<T> {
 		
 	}
 
+	@SuppressWarnings("unchecked")
 	public void expand(){
 		T[] newer = (T[]) new Object[q.length*2];
 
@@ -52,15 +55,18 @@ public class QueueImplementation<T> implements Queue<T> {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
 	public boolean isEmpty(){
 		return(count == 0);
 	}
 
+	@SuppressWarnings("unchecked")
 	public T peek(){
 		return q[front];	
 
 	}
 
+	@SuppressWarnings("unchecked")
 	public int size(){
 		return count;
 	}
