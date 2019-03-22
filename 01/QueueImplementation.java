@@ -1,22 +1,22 @@
 public class QueueImplementation<T> implements Queue<T> {
 
-	private static final int MAX_QUEUE_SIZE = 100;
+	private static final int MAX_QUEUE_SIZE = 1000;
 	private T[] q;
 	private int front, rear, count;
 
 	@SuppressWarnings("unchecked")
 	public QueueImplementation(){
 		q = (T[]) new Object[MAX_QUEUE_SIZE];
-		front = 0;
-		rear = -1; // represents the empty queue
+		front = 1;
+		rear = 0; // represents the empty queue
 		count = 0;
 	}
 
 	@SuppressWarnings("unchecked")
 	public QueueImplementation(int size){
 		q = (T[]) new Object[size];
-		front = 0;
-		rear = -1; // represents the empty queue
+		front = 1;
+		rear = 0; // represents the empty queue
 		count = 0;
 	}
 
