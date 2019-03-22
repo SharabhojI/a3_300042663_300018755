@@ -7,7 +7,7 @@ public class QueueImplementation<T> implements Queue<T> {
 	@SuppressWarnings("unchecked")
 	public QueueImplementation(){
 		q = (T[]) new Object[MAX_QUEUE_SIZE];
-		front = 1;
+		front = 0;
 		rear = 0; // represents the empty queue
 		count = 0;
 	}
@@ -15,7 +15,7 @@ public class QueueImplementation<T> implements Queue<T> {
 	@SuppressWarnings("unchecked")
 	public QueueImplementation(int size){
 		q = (T[]) new Object[size];
-		front = 1;
+		front = 0;
 		rear = 0; // represents the empty queue
 		count = 0;
 	}

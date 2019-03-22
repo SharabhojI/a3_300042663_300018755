@@ -12,7 +12,12 @@ import javax.swing.*;
 
 public class GameView extends JFrame {
 
-    // your variables here
+    private GameModel gameModel;
+    private GameController gameController;
+    private JButton reset, random, quit;
+    private JCheckbox solution;
+    private JLabel steps;
+    private JPanel dotPanel, menuPanel,stepsPanel;
 
 
     /**

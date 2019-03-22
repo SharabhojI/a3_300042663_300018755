@@ -343,49 +343,174 @@ public class Solution {
 
     public boolean stillPossible(boolean nextValue, GameModel model){
 
-        board = new boolean[model.getHeight()][model.getWidth()];
+        // board = new boolean[model.getHeight()][model.getWidth()];
 
-        for (int i = 0; i<height; i++){
-            for (int j = 0; j<width; j++){
+        // for (int i = 0; i<height; i++){
+        //     for (int j = 0; j<width; j++){
 
-                if (model.isON(i,j) == true){
-                    board[i][j] = true;
+        //         if (model.isON(i,j) == true){
+        //             board[i][j] = true;
+        //         }
+        //     }
+        // }
+        row = currentIndex/width;
+        col = currentIndex%width;
+
+        boolean[][] newBoard = new boolean[model.getHeight()][model.getWidth()];
+
+        for (int i = 0; i<model.getHeight(); i++){
+            for (int j = 0; j<model.getWidth(); j++){
+
+                newBoard[i][j] = model.isON(i,j);
+            }
+        }
+        for (int i = 0; i<this.height; i++){
+            for (int j = 0; j<this.width; j++){
+
+                boolean step = this.board[i][j];
+
+                if (step == true){
+                    newBoard[i][j] = !newBoard[i][j];
+
+                    if (isValid(i+1,j)){
+                        newBoard[i+1][j] = !newBoard[i+1][j];
+                    }
+                    if (isValid(i-1,j)){
+                        newBoard[i-1][j] = !newBoard[i-1][j];
+                    }
+                    if (isValid(i,j+1)){
+                        newBoard[i][j+1] = !newBoard[i][j+1];
+                    }
+                    if (isValid(i,j-1)){
+                        newBoard[i][j-1] = !newBoard[i][j-1];
+                    }
+
                 }
+
             }
         }
 
-        return stillPossible(nextValue);
+        if (row >= board.length || col >= board[0].length) return false;
+        if (row == 0 || row-1 == 0) return true;
+        
+        for(int i = 0; i < board[0].length; i++) {
+            if (newBoard[row-2][i] == false) return false;
+        }
+        return true;
     }
 
     public boolean finish(GameModel model){
 
-        board = new boolean[model.getHeight()][model.getWidth()];
+        // board = new boolean[model.getHeight()][model.getWidth()];
 
-        for (int i = 0; i<height; i++){
-            for (int j = 0; j<width; j++){
+        // for (int i = 0; i<height; i++){
+        //     for (int j = 0; j<width; j++){
 
-                if (model.isON(i,j) == true){
-                    board[j][i] = true;
-                }
-            }
-        }
+        //         if (model.isON(i,j) == true){
+        //             board[j][i] = true;
+        //         }
+        //     }
+        // }
        
-       return finish();
+       boolean stillPossibleWithTrue = stillPossible(true,model);
+       boolean stillPossibleWithFalse = stillPossible(false,model);
+
+       if (stillPossibleWithFalse == true && stillPossibleWithTrue == true){
+        return false;
+       }
+
+       while (currentIndex<model.getHeight()*model.getWidth()){
+            if (stillPossibleWithTrue == true){
+                setNext(true);
+            }
+
+            else if (stillPossibleWithFalse == true){
+                setNext(false);
+            }
+
+            else{
+                return false;
+            }
+            stillPossibleWithTrue = stillPossible(true,model);
+            stillPossibleWithFalse = stillPossible(false,model);
+
+       }
+       if (isSuccessful(model)){
+        return true;
+       }
+       else{
+        return false;
+       }
     }
 
-    public boolean isSuccesful(GameModel model){
+    public boolean isSuccessful(GameModel model){
     	if(currentIndex < model.getWidth()*model.getHeight()){
             System.out.println("Board incomplete");
             return false;
         }
 
-        for(int i=0; i<model.getHeight(); i++){
-            for(int j = 0; j < model.getWidth(); j++) {
-                if(!oddNeighborhood(i,j)){
+        // for(int i=0; i<model.getHeight(); i++){
+        //     for(int j = 0; j < model.getWidth(); j++) {
+        //         if(!oddNeighborhood(i,j)){
+        //             return false;
+        //         }
+        //     }
+        // }
+        // return true;
+
+        boolean[][] newBoard = new boolean[model.getHeight()][model.getWidth()];
+
+        for (int i = 0; i<model.getHeight(); i++){
+            for (int j = 0; j<model.getWidth(); j++){
+
+                newBoard[i][j] = model.isON(i,j);
+            }
+        }
+
+        for (int i = 0; i<this.height; i++){
+            for (int j = 0; j<this.width; j++){
+
+                boolean step = this.board[i][j];
+
+                if (step == true){
+                    newBoard[i][j] = !newBoard[i][j];
+
+                    if (isValid(i+1,j)){
+                        newBoard[i+1][j] = !newBoard[i+1][j];
+                    }
+                    if (isValid(i-1,j)){
+                        newBoard[i-1][j] = !newBoard[i-1][j];
+                    }
+                    if (isValid(i,j+1)){
+                        newBoard[i][j+1] = !newBoard[i][j+1];
+                    }
+                    if (isValid(i,j-1)){
+                        newBoard[i][j-1] = !newBoard[i][j-1];
+                    }
+
+                }
+
+            }
+        }
+
+        for (int i = 0; i<this.height; i++){
+            for (int j = 0; j<this.width; j++){
+                if(newBoard[i][j] == false){
                     return false;
                 }
             }
         }
+
+        return true;
+
+    }
+
+    private boolean isValid(int i,int j){
+
+        if (i<0 || i>=this.height || j<0 || j>=this.width){
+            return false;
+        }
+
         return true;
     }
 
@@ -401,5 +526,13 @@ public class Solution {
             }
         }
     return truCtr;
+    }
+
+    public boolean get(int i, int j){
+        return board[i][j];
+    }
+
+    public void set(int i, int j, boolean value){
+        board[i][j] = value;
     }
 }
