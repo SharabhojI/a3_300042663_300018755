@@ -6,7 +6,7 @@ public class GameModel {
 	public GameModel(int width, int height){
 		this.height = height;
 		this.width = width;
-		board = new boolean[height][width]; 
+		board = new boolean[width][height]; 
 	}
 
 	public int getHeight(){
@@ -28,8 +28,8 @@ public class GameModel {
 	}
 
 	public void reset(){
-		for(int i = 0; i < getHeight(); i++){
-			for(int j = 0; j < getWidth(); j++){
+		for(int j = 0; j < getHeight(); j++){
+			for(int i = 0; i < getWidth(); i++){
 				board[i][j] = false;
 			} 
 		}
@@ -37,7 +37,7 @@ public class GameModel {
 	}
 
 	public void set(int i, int j, boolean value){
-		board[i][j] = value;
+		board[j][i] = value;
 	}
 
 	public String toString(){
@@ -46,7 +46,7 @@ public class GameModel {
         for (int i = 0; i<this.height; i++){
             boardStr = boardStr + "[";
             for (int j = 0; j<this.width; j++){
-                boardStr = boardStr + this.board[i][j];
+                boardStr = boardStr + this.board[j][i];
 
                 if (j != (this.width - 1)){
                     boardStr = boardStr + ",";
