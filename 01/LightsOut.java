@@ -146,7 +146,6 @@ public class LightsOut {
                 minimum = solutions.get(i);
             }
         }
-
         return minimum;        
     }
 }
