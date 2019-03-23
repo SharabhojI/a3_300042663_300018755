@@ -1,9 +1,15 @@
-// YOUR IMPORT HERE
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.awt.*;
+import java.io.IOException;
 
 public class GridButton extends JButton {
 
 
-    // YOUR VARIABLES HERE
+    private int row;
+    private int column;
+    private boolean isOn;
+    private boolean isClicked;
 
 
     /**
@@ -18,7 +24,14 @@ public class GridButton extends JButton {
 
     public GridButton(int column, int row) {
 
-        // YOUR CODE HERE
+        setBackground(Color.WHITE);
+
+        this.column = column;
+        this.row = row;
+
+        setIcon(new ImageIcon(GridIcon()));
+
+
     }
 
    /**
@@ -30,8 +43,8 @@ public class GridButton extends JButton {
     */ 
     public void setState(boolean isOn, boolean isClicked) {
 
-        // YOUR CODE HERE
-
+        this.isOn = isOn;
+        this.isClicked = isClicked;
     }
 
  
@@ -43,7 +56,7 @@ public class GridButton extends JButton {
      */
 
     public int getRow() {
-        // YOUR CODE HERE
+        return row;
     }
 
     /**
@@ -53,8 +66,18 @@ public class GridButton extends JButton {
      */
 
     public int getColumn() {
-        // YOUR CODE HERE
+        return column;
     }
 
-    // YOUR OTHER METHODS HERE
+    private Image GridIcon(){
+
+        try{
+            return ImageIO.read(getClass().getResource("Icons/Light-1.png"));
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+
+        return null;
+    }
 }

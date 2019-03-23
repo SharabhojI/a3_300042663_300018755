@@ -57,7 +57,7 @@ public class LightsOut {
             Solution s  = q.dequeue();
             if(s.isReady()) {
                 if(s.isSuccessful()) {
-                    System.out.println("Arraylist not full");
+                    //System.out.println("Arraylist not full");
                     System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
                     solutions.add(s);
                 }
@@ -129,18 +129,72 @@ public class LightsOut {
         int height = model.getHeight();
         int width = model.getWidth();
 
-        return solve(width,height);
+        // ArrayList<Solution> old = solve(width,height);
+
+        // ArrayList<Solution> s = new ArrayList<Solution>();
+
+        // for (int i = 0; i<old.size(); i++){
+        //     FixSolution(old.get(i), model);
+
+        //     if (old.get(i).isSuccessful()){
+        //         s.add(old.get(i));
+        //     }
+        // }
+
+        // return s;
+        Queue<Solution> q  = new QueueImplementation<Solution>();
+        ArrayList<Solution> solutions  = new ArrayList<Solution>();
+        Solution a = new Solution(width,height);
+        q.enqueue(a);
+
+        long start = System.currentTimeMillis();
+        while(!q.isEmpty()){
+            Solution s  = q.dequeue();
+            if(s.isReady()) {
+                if(s.isSuccessful(model)) {
+                    //System.out.println("Arraylist not full");
+                    System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
+                    solutions.add(s);
+                }
+            } else {
+                Solution s2 = new Solution(s);
+                if (s.stillPossible(true, model)){
+                    s.setNext(true);
+                    s.finish(model);
+                    q.enqueue(s);
+                }
+                if (s2.stillPossible(false, model)){
+                    s2.setNext(false);
+                    s2.finish(model);
+                    q.enqueue(s2);
+                }
+            }
+        }
+        return solutions;
+            
+    }
+
+    private static void FixSolution(Solution solution, GameModel model){
+
+        for (int i = 0; i<model.getHeight(); i++){
+            for (int j = 0; j<model.getWidth(); j++){
+
+                if (model.isON(i,j) && solution.get(i,j)==false){
+                    solution.set(i,j,true);
+                }
+                else if (model.isON(i,j) && solution.get(i,j) == true){
+                    solution.set(i,j,false);
+                }
+            }
+        }
     }
 
     static Solution solveShortest(GameModel model){
 
-        int height = model.getHeight();
-        int width = model.getWidth();
-
-        ArrayList<Solution> solutions = solve(width,height);
+        ArrayList<Solution> solutions = solve(model);
 
         if (solutions.size() == 0){
-            throw new IndexOutOfBoundsException("No solutions");
+            return null;
         }
 
         else{
