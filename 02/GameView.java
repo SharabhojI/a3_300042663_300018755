@@ -107,8 +107,7 @@ public class GameView extends JFrame {
     public boolean solutionShown(){
 
         // YOUR CODE HERE
-        return true;
-
+        return solution.isSelected();
     }
 
 }

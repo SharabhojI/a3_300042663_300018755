@@ -93,4 +93,35 @@ public class GameModel {
         }
         return boardStr;
     }
+
+    /**
+     * Updates the model after the dot at location row i and column j is clicked. 
+     * It does change the state of that dot and the state of its neighborhood 
+     * according to the logic of the game.
+     */
+    public void click(int i, int j){
+
+    }
+
+    /**
+     * The number of times the method click has been called since the last reset 
+     * (or since the beginning if the game was never reset).
+     */
+    public int getNumberOfSteps(){
+    	return steps;
+    }
+
+    /**
+     * Restarts the game with a solvable random board instead of an all OFF board.
+     */
+    public void randomize(){
+
+    }
+
+    /**
+     * Forces the model to find a minimal size instance of Solution for the current model.
+     */
+    public void setSolution(){
+    	
+    }
 }
