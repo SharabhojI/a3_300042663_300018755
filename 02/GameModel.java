@@ -21,20 +21,29 @@ public class GameModel {
 	}
 
 	public boolean isON(int i, int j){
-		return(board.oddNeighborhood(i, j));
+		// boolean result = false;
+
+		// if (board[i][j] == true){
+		// 	result = true;
+		// }
+
+		// return result;
+
+		return false;
 	}
 
 	public void reset(){
-		for(int i = 0; i < getHeight(); i++){
-			for(int j = 0; j < getWidht(); j++){
-				board[i][j] = false;
-			} 
-		}
-		this.steps = 0;
+		// for(int i = 0; i < getHeight(); i++){
+		// 	for(int j = 0; j < getWidth(); j++){
+		// 		board[i][j] = false;
+		// 	} 
+		// }
+		// this.steps = 0;
+
 	}
 
 	public void set(int i, int j, boolean value){
-		board[i][j] = value;
+		//board[i][j] = value;
 	}
 
 	public String toString(){
@@ -53,6 +62,7 @@ public class GameModel {
 
 	public boolean isFinished(){
 		//todo
+		return true;
 	}
 
 	public void setSolution(){
@@ -61,5 +71,6 @@ public class GameModel {
 
 	public boolean solutionSelects(int i, int j){
 		//todo
+		return true;
 	}
 }

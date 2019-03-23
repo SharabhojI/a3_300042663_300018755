@@ -54,32 +54,32 @@ public class LightsOut {
         SolutionQueue q  = new ArrayListSolutionQueue();
         ArrayList<Solution> solutions  = new ArrayList<Solution>();
 
-        q.enqueue(new Solution(width,height));
-        long start = System.currentTimeMillis();
-        while(!q.isEmpty()){
-            Solution s  = q.dequeue();
-            if(s.isReady()){
-                // by construction, it is successfull
-                System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
-                solutions.add(s);
-            } else {
-                boolean withTrue = s.stillPossible(true);
-                boolean withFalse = s.stillPossible(false);
-                if(withTrue && withFalse) {
-                    Solution s2 = new Solution(s);
-                    s.setNext(true);
-                    q.enqueue(s);
-                    s2.setNext(false);
-                    q.enqueue(s2);
-                } else if (withTrue) {
-                    s.setNext(true);
-                    q.enqueue(s);                
-                } else if (withFalse) {
-                    s.setNext(false);
-                    q.enqueue(s);                
-                }
-            }
-        }
+        // q.enqueue(new Solution(width,height));
+        // long start = System.currentTimeMillis();
+        // while(!q.isEmpty()){
+        //     Solution s  = q.dequeue();
+        //     if(s.isReady()){
+        //         // by construction, it is successfull
+        //         System.out.println("Solution found in " + (System.currentTimeMillis()-start) + " ms" );
+        //         solutions.add(s);
+        //     } else {
+        //         boolean withTrue = s.stillPossible(true);
+        //         boolean withFalse = s.stillPossible(false);
+        //         if(withTrue && withFalse) {
+        //             Solution s2 = new Solution(s);
+        //             s.setNext(true);
+        //             q.enqueue(s);
+        //             s2.setNext(false);
+        //             q.enqueue(s2);
+        //         } else if (withTrue) {
+        //             s.setNext(true);
+        //             q.enqueue(s);                
+        //         } else if (withFalse) {
+        //             s.setNext(false);
+        //             q.enqueue(s);                
+        //         }
+        //     }
+        // }
 
         return solutions;
     }
@@ -127,14 +127,15 @@ public class LightsOut {
                 height  = DEFAULT_HEIGHT;
             }
         }
-        ArrayList<Solution> results   = solve(width,height);
-        for(int i =0; i < results.size(); i++){
+        // ArrayList<Solution> results   = solve(width,height);
+        // for(int i =0; i < results.size(); i++){
 
-            System.out.println("****");
-            System.out.println(results.get(i));
+        //     System.out.println("****");
+        //     System.out.println(results.get(i));
 
-        }
-        System.out.println("In a board of "+ width + "x" + height +": " + results.size() + " solution" + (results.size() > 1 ? "s." : "."));
+        // }
+        // System.out.println("In a board of "+ width + "x" + height +": " + results.size() + " solution" + (results.size() > 1 ? "s." : "."));
 
+        GameController controller = new GameController(width, height);
     }
 }

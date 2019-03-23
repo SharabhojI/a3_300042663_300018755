@@ -1,4 +1,6 @@
 import javax.swing.*;
+import java.awt.*;
+import static java.awt.BorderLayout.*;
 
 // your other import here if needed
 
@@ -15,9 +17,9 @@ public class GameView extends JFrame {
     private GameModel gameModel;
     private GameController gameController;
     private JButton reset, random, quit;
-    private JCheckbox solution;
-    private JLabel steps;
-    private JPanel dotPanel, menuPanel,stepsPanel;
+    private JCheckBox solution;
+    private JLabel stepCount;
+    private JPanel dotPanel, menuPanel, stepsPanel;
 
 
     /**
@@ -31,7 +33,41 @@ public class GameView extends JFrame {
 
     public GameView(GameModel gameModel, GameController gameController) {
 
-        // YOUR CODE HERE
+        this.gameModel = gameModel;
+        this.gameController = gameController;
+
+        GridLayout dotGrid = new GridLayout(gameModel.getHeight(), gameModel.getWidth());
+        dotPanel = new JPanel(dotGrid);
+
+        GridLayout menuGrid = new GridLayout(4,1);
+        menuPanel = new JPanel(menuGrid);
+
+        GridLayout stepsGrid = new GridLayout(1,1);
+        stepsPanel = new JPanel(stepsGrid);
+
+        reset = new JButton("Reset");
+        random = new JButton("Random");
+        quit = new JButton("Quit");
+
+        solution = new JCheckBox("Solution");
+
+        stepCount = new JLabel("Number of steps: 0");
+
+        menuPanel.add(reset);
+        menuPanel.add(random);
+        menuPanel.add(solution);
+        menuPanel.add(quit);
+
+        update();
+
+        setSize(1500,1500);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+
+        add(menuPanel, EAST);
+        add(stepCount, SOUTH);
+        pack();
+
+        setVisible(true);
 
     }
 
@@ -42,7 +78,22 @@ public class GameView extends JFrame {
 
     public void update(){
 
-        // YOUR CODE HERE
+        remove(dotPanel);
+
+        GridLayout dotGrid = new GridLayout(gameModel.getHeight(), gameModel.getWidth());
+        dotPanel = new JPanel(dotGrid);
+
+        for (int i = 0; i<gameModel.getHeight(); i++){
+            for (int j = 0; j<gameModel.getWidth(); j++){
+                GridButton b = new GridButton(j,i);
+                dotPanel.add(b);
+            }
+        }
+
+        add(dotPanel, WEST);
+        revalidate();
+
+        //steps.setText("Number of steps: ");
 
     }
 
@@ -56,6 +107,7 @@ public class GameView extends JFrame {
     public boolean solutionShown(){
 
         // YOUR CODE HERE
+        return true;
 
     }
 

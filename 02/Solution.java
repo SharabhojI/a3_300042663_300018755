@@ -234,23 +234,23 @@ public class Solution {
     }
 
     public boolean stillPossible(boolean nextValue, GameModel model){
-    	//todo
+    	return true;
     }
 
     public boolean finish(GameModel model){
-    	//todo
+    	return true;
     }
 
     public boolean isSuccesful(GameModel model){
-    	//todo
+    	return true;
     }
 
     public int getSize(){
-    	//todo
+    	return 1;
     }
 
     public boolean get(int i, int j){
-    	//todo
+    	return true;
     }
 
 }
