@@ -124,24 +124,16 @@ public class LightsOut {
         System.out.println("In a board of "+ width + "x" + height +": " + results.size() + " solution" + (results.size() > 1 ? "s." : "."));
     }
 
+    /**
+     * The class method solve finds all the solutions to the Lights Out game for a board in 
+     * the state specified by the GameModel instance model, using a Breadth-First Search 
+     * algorithm. It returns an ArrayList containing all the valid solutions to the problem.
+     */
     public static ArrayList<Solution> solve(GameModel model){
 
         int height = model.getHeight();
         int width = model.getWidth();
 
-        // ArrayList<Solution> old = solve(width,height);
-
-        // ArrayList<Solution> s = new ArrayList<Solution>();
-
-        // for (int i = 0; i<old.size(); i++){
-        //     FixSolution(old.get(i), model);
-
-        //     if (old.get(i).isSuccessful()){
-        //         s.add(old.get(i));
-        //     }
-        // }
-
-        // return s;
         Queue<Solution> q  = new QueueImplementation<Solution>();
         ArrayList<Solution> solutions  = new ArrayList<Solution>();
         Solution a = new Solution(width,height);
@@ -188,7 +180,13 @@ public class LightsOut {
             }
         }
     }
-
+    
+    /**
+     * The class method solveShortest returns a reference to a minimum size solution to the Lights Out 
+     * game for a board in the state specified by the GameModel instance model. Note that there 
+     * could be more than one such minimum-size solution. The method can return a 
+     * reference to any one of them.
+     */
     static Solution solveShortest(GameModel model){
 
         ArrayList<Solution> solutions = solve(model);

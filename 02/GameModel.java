@@ -1,76 +1,96 @@
 public class GameModel {
 
- // Your code here
 	private int width, height, steps;
-	private Solution board;
 
+	/**
+     * our board. board[i][j] is true is in this
+     * solution, the cell (j,i) is tapped
+     */
+	private boolean[][] board;
+
+	/**
+     * Constructor. Creates an instance of GameModel 
+     * for a board of size <b>heightxwidth</b>. That 
+     * solution does not have any board position
+     * value explicitly specified yet.
+     *
+     * @param width
+     *  the width of the board
+     * @param height
+     *  the height of the board
+     */
 	public GameModel(int width, int height){
 		this.height = height;
 		this.width = width;
-
-		board = new Solution(width, height);
-		reset();
+		this.steps = 0;
+		board = new boolean[height][width]; 
 	}
 
+	/**
+     * Getter for height.
+     */
 	public int getHeight(){
 		return this.height;
 	}
-
+	/**
+     * Getter for width.
+     */
 	public int getWidth(){
 		return this.width;
 	}
 
+	/**
+	* Returns true if the location at row i and column j
+	* is ON, false otherwise.
+	*/
 	public boolean isON(int i, int j){
-		// boolean result = false;
+		boolean result = false;
 
-		// if (board[i][j] == true){
-		// 	result = true;
-		// }
+		if (board[i][j] == true){
+			result = true;
+		}
 
-		// return result;
-
-		return false;
+		return result;
 	}
 
+	/**
+	* Resets the model to all OFF.
+	*/
 	public void reset(){
-		// for(int i = 0; i < getHeight(); i++){
-		// 	for(int j = 0; j < getWidth(); j++){
-		// 		board[i][j] = false;
-		// 	} 
-		// }
-		// this.steps = 0;
-
+		for(int j = 0; j < getHeight(); j++){
+			for(int i = 0; i < getWidth(); i++){
+				board[j][i] = false;
+			} 
+		}
+		this.steps = 0;
 	}
 
+	/**
+	* Sets the location (i,j) of the model to value.
+	*/
 	public void set(int i, int j, boolean value){
-		//board[i][j] = value;
+		board[j][i] = value;
 	}
 
+	/**
+	* Returns a String representation of the model.
+	*/
 	public String toString(){
-		return(board.toString());
-	}
 
-	public void click(int i, int j){
-		this.steps += 1;
-		//todo
+        String boardStr = "";
+        for (int i = 0; i<height; i++){
+        	boardStr = boardStr + "[";
 
-	}
+        	for (int j = 0; j<width; j++){
+        		boardStr = boardStr + board[i][j];
 
-	public int getNumberOfSteps(){
-		return steps;
-	}
+        		if (j != width-1){
+        			boardStr = boardStr + ",";
+        		}
+        	}
 
-	public boolean isFinished(){
-		//todo
-		return true;
-	}
-
-	public void setSolution(){
-		//todo
-	}
-
-	public boolean solutionSelects(int i, int j){
-		//todo
-		return true;
-	}
+        	boardStr = boardStr + "]\n";
+        }
+        return boardStr;
+    }
 }

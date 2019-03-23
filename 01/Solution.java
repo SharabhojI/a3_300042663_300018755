@@ -35,7 +35,7 @@ public class Solution {
 
     /**
      * Constructor. Creates an instance of Solution 
-     * for a board of size <b>widthxheight</b>. That 
+     * for a board of size <b>heightxwidth</b>. That 
      * solution does not have any board position
      * value explicitly specified yet.
      *
@@ -341,18 +341,14 @@ public class Solution {
         return out.toString();
     }
 
+    /**
+     * This method returns false if the current solution would be impossible 
+     * finalize into a working solution for a board in the state specified by 
+     * the GameModel instance model, should it be extended from its current 
+     * state with the value nextvalue.
+     */
     public boolean stillPossible(boolean nextValue, GameModel model){
 
-        // board = new boolean[model.getHeight()][model.getWidth()];
-
-        // for (int i = 0; i<height; i++){
-        //     for (int j = 0; j<width; j++){
-
-        //         if (model.isON(i,j) == true){
-        //             board[i][j] = true;
-        //         }
-        //     }
-        // }
         row = currentIndex/width;
         col = currentIndex%width;
 
@@ -399,18 +395,17 @@ public class Solution {
         return true;
     }
 
+    /**
+     * This method assumes that the solution is currently still extendable 
+     * for a board in the state specified by the GameModel instance model, 
+     * but only one way. It keeps extending that solution with the one 
+     * correct way that it finds at each step, until the solution is 
+     * complete and correct for a board in the state specified by the 
+     * GameModel instance model, or shown to not be work. It returns true 
+     * if and only if the solution is extended into a complete, working 
+     * solution.
+     */
     public boolean finish(GameModel model){
-
-        // board = new boolean[model.getHeight()][model.getWidth()];
-
-        // for (int i = 0; i<height; i++){
-        //     for (int j = 0; j<width; j++){
-
-        //         if (model.isON(i,j) == true){
-        //             board[j][i] = true;
-        //         }
-        //     }
-        // }
        
        boolean stillPossibleWithTrue = stillPossible(true,model);
        boolean stillPossibleWithFalse = stillPossible(false,model);
@@ -443,20 +438,17 @@ public class Solution {
        }
     }
 
+    /**
+     * this method returns true if the solution is completely specified and 
+     * is indeed working, that is, if it will bring a board of the specified 
+     * dimensions from the state specified by the GameModel instance model 
+     * to being entirely on.
+     */
     public boolean isSuccessful(GameModel model){
     	if(currentIndex < model.getWidth()*model.getHeight()){
             System.out.println("Board incomplete");
             return false;
         }
-
-        // for(int i=0; i<model.getHeight(); i++){
-        //     for(int j = 0; j < model.getWidth(); j++) {
-        //         if(!oddNeighborhood(i,j)){
-        //             return false;
-        //         }
-        //     }
-        // }
-        // return true;
 
         boolean[][] newBoard = new boolean[model.getHeight()][model.getWidth()];
 
@@ -514,6 +506,10 @@ public class Solution {
         return true;
     }
 
+    /**
+     * Returns the size of the solution, that is, the number of positions 
+     * that must be tapped. 
+     */
     public int getSize(){
 
         int truCtr = 0;
