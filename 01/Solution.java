@@ -523,12 +523,4 @@ public class Solution {
         }
     return truCtr;
     }
-
-    public boolean get(int i, int j){
-        return board[i][j];
-    }
-
-    public void set(int i, int j, boolean value){
-        board[i][j] = value;
-    }
 }

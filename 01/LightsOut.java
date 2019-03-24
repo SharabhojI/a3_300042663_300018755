@@ -166,20 +166,20 @@ public class LightsOut {
             
     }
 
-    private static void FixSolution(Solution solution, GameModel model){
+    // private static void FixSolution(Solution solution, GameModel model){
 
-        for (int i = 0; i<model.getHeight(); i++){
-            for (int j = 0; j<model.getWidth(); j++){
+    //     for (int i = 0; i<model.getHeight(); i++){
+    //         for (int j = 0; j<model.getWidth(); j++){
 
-                if (model.isON(i,j) && solution.get(i,j)==false){
-                    solution.set(i,j,true);
-                }
-                else if (model.isON(i,j) && solution.get(i,j) == true){
-                    solution.set(i,j,false);
-                }
-            }
-        }
-    }
+    //             if (model.isON(i,j) && solution.get(i,j)==false){
+    //                 solution.set(i,j,true);
+    //             }
+    //             else if (model.isON(i,j) && solution.get(i,j) == true){
+    //                 solution.set(i,j,false);
+    //             }
+    //         }
+    //     }
+    // }
     
     /**
      * The class method solveShortest returns a reference to a minimum size solution to the Lights Out 

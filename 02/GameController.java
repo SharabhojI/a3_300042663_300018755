@@ -2,6 +2,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemListener;
 import java.awt.event.ItemEvent;
+import java.awt.event.*;
+import javax.swing.*;
+
 
 // YOUR OTHER IMPORTS HERE IF NEEDED
 
@@ -20,6 +23,7 @@ public class GameController implements ActionListener, ItemListener {
     private GameModel gameModel;
     private int height;
     private int width;
+    private boolean[][] board;
 
 
     /**
@@ -36,6 +40,15 @@ public class GameController implements ActionListener, ItemListener {
         this.gameModel = new GameModel(width,height);
         this.gameView = new GameView(gameModel, GameController.this);
 
+        board = new boolean[gameModel.getHeight()][gameModel.getWidth()];
+
+        for (int i = 0; i<gameModel.getHeight(); i++){
+            for (int j = 0; j<gameModel.getWidth(); j++){
+
+                board[i][j] = gameModel.isON(i,j);
+            }
+        }
+
         
     }
 
@@ -50,7 +63,30 @@ public class GameController implements ActionListener, ItemListener {
 
     public void actionPerformed(ActionEvent e) {
         
-        // YOUR CODE HERE
+        if(e.getActionCommand().equals("Reset")) {
+            gameModel.reset();
+
+        }
+
+        if(e.getActionCommand().equals("Quit")) {
+            //gameView.quit();
+
+        }
+
+        if(e.getActionCommand().equals("Random")) {
+            gameModel.randomize();
+
+        }
+
+        for (int i = 0; i<gameModel.getHeight(); i++){
+            for (int j = 0; j<gameModel.getWidth(); j++){
+
+                if (e.getActionCommand().equals(board[i][j])){
+                    gameModel.click(i,j);
+                    gameView.update();
+                }
+            }
+        }
 
     }
 

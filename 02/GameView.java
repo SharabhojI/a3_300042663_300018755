@@ -51,7 +51,7 @@ public class GameView extends JFrame {
 
         solution = new JCheckBox("Solution");
 
-        stepCount = new JLabel("Number of steps: 0");
+        stepCount = new JLabel("Number of steps: " + gameModel.getNumberOfSteps());
 
         menuPanel.add(reset);
         menuPanel.add(random);

@@ -6,7 +6,7 @@ public class Q1Tests {
     private static void runSolverTest(GameModel model, int numberOfSolutions){
         ArrayList<Solution>  results  = LightsOut.solve(model);
         if(results.size()==numberOfSolutions) {
-            System.out.println("Success!");
+            System.out.println("Success!\n");
         } else {
             System.out.println("Failure! Expecting " 
                 + numberOfSolutions + " and got " 

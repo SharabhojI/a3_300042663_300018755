@@ -101,6 +101,36 @@ public class GameModel {
      */
     public void click(int i, int j){
 
+    	for (int a = 0; a<this.height; a++){
+    		for (int b = 0; b<this.width; b++){
+
+    			board[a][b] = !board[a][b];
+
+    			if (isValid(a,b+1)){
+    				board[a][b+1] = !board[a][b+1];
+    			}
+    			if (isValid(a,b-1)){
+    				board[a][b-1] = !board[a][b-1];
+    			}
+    			if (isValid(a+1,j)){
+    				board[a+1][b] = !board[a+1][b];
+    			}
+    			if (isValid(a-1,b)){
+    				board[a-1][b] = !board[a-1][b];
+    			}
+    		}
+    	}
+
+    	steps++;
+    }
+
+	private boolean isValid(int i,int j){
+
+        if (i<0 || i>=this.height || j<0 || j>=this.width){
+            return false;
+        }
+
+        return true;
     }
 
     /**
