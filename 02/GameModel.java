@@ -154,16 +154,15 @@ public class GameModel {
     	int r = rand.nextInt(upper);
     	int count = 0;
     	while(count < r){
-    		for(int i = rand.nextInt(this.getHeight())){
-    			for(int j = rand.nextInt(this.getWidth())){
-    				int boolval = rand.nextInt(2);
-    				if(boolval == 0){
-    					modelo.set(i,j,true);
-    				}
-    				else{
-    					modelo.set(i,j,false);
-    				}
+    		int i = rand.nextInt(this.getHeight());
+    		int j = rand.nextInt(this.getWidth());
+    		int boolval = rand.nextInt(2);
+    			if(boolval == 0){
+    				modelo.set(i,j,true);
     			}
+    			else{
+    				modelo.set(i,j,false);
+    			}    			
     		}
     		count++;
     		Solution sol = new Solution(modelo.getWidth(),modelo.getHeight());
