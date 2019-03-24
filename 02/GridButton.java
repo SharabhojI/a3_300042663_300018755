@@ -2,7 +2,8 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
-
+import javax.swing.BorderFactory;
+import javax.swing.border.Border;
 public class GridButton extends JButton {
 
 
@@ -30,6 +31,8 @@ public class GridButton extends JButton {
         this.row = row;
 
         setIcon(new ImageIcon(GridIcon()));
+        Border border = BorderFactory.createEmptyBorder(0,0,0,0);
+        setBorder(border);
 
 
     }
@@ -72,8 +75,14 @@ public class GridButton extends JButton {
     private Image GridIcon(){
 
         try{
-            return ImageIO.read(getClass().getResource("Icons/Light-1.png"));
+            if (isOn == false){
+                return ImageIO.read(getClass().getResource("Icons/Light-1.png"));
+            }
+            else if (isOn == true){
+                return ImageIO.read(getClass().getResource("Icons/Light-0.png"));
+            }
         }
+
         catch (IOException e){
             e.printStackTrace();
         }
