@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class GameModel {
 
 	private int width, height, steps;
@@ -9,10 +11,8 @@ public class GameModel {
 	private boolean[][] board;
 
 	/**
-     * Constructor. Creates an instance of GameModel 
-     * for a board of size <b>heightxwidth</b>. That 
-     * solution does not have any board position
-     * value explicitly specified yet.
+     * the constructor. Creates an all OFF game of 
+     * width width and of height height.
      *
      * @param width
      *  the width of the board
@@ -145,13 +145,40 @@ public class GameModel {
      * Restarts the game with a solvable random board instead of an all OFF board.
      */
     public void randomize(){
-
+    	GameModel modelo = new GameModel();
+    	//gets upper value for random number
+    	int upper = (this.getHeight()*this.getWidth());
+    	Random rand = new Random();
+    	int r = rand.nextInt(upper);
+    	int count = 0;
+    	while(count < r){
+    		for(int i = rand.nextInt(this.getHeight())){
+    			for(int j = rand.nextInt(this.getWidth())){
+    				int boolval = rand.nextInt(2);
+    				if(boolval == 0){
+    					modelo.set(i,j,true);
+    				}
+    				else{
+    					modelo.set(i,j,false);
+    				}
+    			}
+    		}
+    		count++;
+    		Solution sol = new Solution(modelo.getWidth(),modelo.getHeight());
+    		if(sol.finish(modelo) == false){
+    			this.randomize();
+    		}
+    		else{
+    			this.board = modelo.board;
+    		}
+    	}
     }
 
     /**
      * Forces the model to find a minimal size instance of Solution for the current model.
      */
     public void setSolution(){
-    	
+    	Solution sol = new Solution(this.getWidth(), this.getHeight());
+    	sol = LightsOut.solveShortest(this);
     }
 }
