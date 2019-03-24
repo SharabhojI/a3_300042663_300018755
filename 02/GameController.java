@@ -47,9 +47,7 @@ public class GameController implements ActionListener, ItemListener {
 
                 board[i][j] = gameModel.isON(i,j);
             }
-        }
-
-        
+        }        
     }
 
 
@@ -98,9 +96,16 @@ public class GameController implements ActionListener, ItemListener {
      *            the ItemEvent
      */
 
-    public void  itemStateChanged(ItemEvent e){
+    public void itemStateChanged(ItemEvent e){
 
         // YOU CODE HERE
+        if(e.getStateChange() == ItemEvent.SELECTED){
+        	gameModel.solution.setSelected(true);
+        	gameModel.setSolution();
+        }
+        else{
+        	gameModel.solution.setSelected(false);
+        }
     }
 
     // YOUR OTHER METHODS HERE

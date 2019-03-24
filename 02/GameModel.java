@@ -4,6 +4,8 @@ public class GameModel {
 
 	private int width, height, steps;
 
+    private Solution sol;
+
 	/**
      * our board. board[i][j] is true is in this
      * solution, the cell (j,i) is tapped
@@ -178,7 +180,14 @@ public class GameModel {
      * Forces the model to find a minimal size instance of Solution for the current model.
      */
     public void setSolution(){
-    	Solution sol = new Solution(this.getWidth(), this.getHeight());
+    	sol = new Solution(this.getWidth(), this.getHeight());
     	sol = LightsOut.solveShortest(this);
+    }
+
+    public boolean solutionSelects(int i, int j){
+        if(sol != null){
+            return(sol.get(j,i)==true);
+        }
+        return false;
     }
 }
