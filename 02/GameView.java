@@ -50,6 +50,7 @@ public class GameView extends JFrame {
         quit = new JButton("Quit");
 
         solution = new JCheckBox("Solution");
+        solution.addItemListener(this.gameController);
 
         stepCount = new JLabel("Number of steps: " + gameModel.getNumberOfSteps());
 

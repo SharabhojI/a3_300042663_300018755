@@ -147,7 +147,7 @@ public class GameModel {
      * Restarts the game with a solvable random board instead of an all OFF board.
      */
     public void randomize(){
-    	GameModel modelo = new GameModel();
+    	GameModel modelo = new GameModel(this.getWidth(),this.getHeight());
     	//gets upper value for random number
     	int upper = (this.getHeight()*this.getWidth());
     	Random rand = new Random();
@@ -163,17 +163,17 @@ public class GameModel {
     			else{
     				modelo.set(i,j,false);
     			}    			
-    		}
+    	
     		count++;
-    		Solution sol = new Solution(modelo.getWidth(),modelo.getHeight());
-    		if(sol.finish(modelo) == false){
+    		Solution solo = new Solution(modelo.getWidth(),modelo.getHeight());
+    		if(solo.finish(modelo) == false){
     			this.randomize();
     		}
     		else{
     			this.board = modelo.board;
     		}
     	}
-    }
+    }   
 
     /**
      * Forces the model to find a minimal size instance of Solution for the current model.

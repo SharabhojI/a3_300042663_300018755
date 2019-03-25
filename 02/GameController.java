@@ -61,8 +61,14 @@ public class GameController implements ActionListener, ItemListener {
 
     public void actionPerformed(ActionEvent e) {
         
+        if(e.getSource() instanceof GridButton){
+            GridButton button = (GridButton)e.getSource();
+            button.setState(!gameModel.isON(button.getRow(), button.getColumn()), gameModel.solutionSelects(button.getRow(), button.getColumn()));
+        }
+
         if(e.getActionCommand().equals("Reset")) {
             gameModel.reset();
+            gameView.update();
 
         }
 
@@ -73,6 +79,7 @@ public class GameController implements ActionListener, ItemListener {
 
         if(e.getActionCommand().equals("Random")) {
             gameModel.randomize();
+            gameView.update();
 
         }
 
@@ -99,12 +106,14 @@ public class GameController implements ActionListener, ItemListener {
     public void itemStateChanged(ItemEvent e){
 
         // YOU CODE HERE
+        JCheckBox box = (JCheckBox)e.getSource(); 
         if(e.getStateChange() == ItemEvent.SELECTED){
-        	gameModel.solution.setSelected(true);
+        	box.setSelected(true);
         	gameModel.setSolution();
+            gameView.update();
         }
         else{
-        	gameModel.solution.setSelected(false);
+        	box.setSelected(false);
         }
     }
 
